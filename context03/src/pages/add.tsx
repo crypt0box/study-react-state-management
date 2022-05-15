@@ -3,15 +3,14 @@ import { ComponentProps, useContext } from "react";
 import { TodosDispatchContext } from "src/state/todo";
 
 const Add: NextPage = () => {
-  const setTodos = useContext(TodosDispatchContext);
+  console.log("rendered!");
+
+  const { addTodo } = useContext(TodosDispatchContext);
 
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (e) => {
     e.preventDefault();
     const text = e.currentTarget.text.value;
-    setTodos((prevTodos) => {
-      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
-      return [...prevTodos, newTodo];
-    });
+    addTodo(text);
     e.currentTarget.reset();
   };
 
